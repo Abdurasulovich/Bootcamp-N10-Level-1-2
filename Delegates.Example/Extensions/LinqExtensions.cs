@@ -2,34 +2,37 @@
 
 public static class LinqExtensions
 {
-    public static  IEnumerable<(TSource, TSource)> ZipIntersectBy<TSource, TKey>(
+    public static IEnumerable<(TSource, TSource)> ZipIntersectBy<TSource, TKey>(
         this ICollection<TSource> sourceA,
-        ICollection<TSource> sourceB, 
+        ICollection<TSource> sourceB,
         Func<TSource, TKey> keySelector
-        )where TKey : notnull
+        ) where TKey : notnull
     {
-        if( sourceA == null ) 
+        if (sourceA == null)
             throw new ArgumentNullException(nameof(sourceA));
-        if(sourceB == null)
+
+        if (sourceB == null)
             throw new ArgumentNullException(nameof(sourceB));
-        if( keySelector == null )
+
+        if (keySelector == null)
             throw new ArgumentNullException(nameof(keySelector));
+
         return ZipIntersectByIterator(sourceA, sourceB, keySelector);
     }
 
     private static IEnumerable<(TSource, TSource)> ZipIntersectByIterator<TSource, TKey>(
         this ICollection<TSource> sourceA,
-        ICollection<TSource> sourceB, 
+        ICollection<TSource> sourceB,
         Func<TSource, TKey> keySelector
-        )where TKey : notnull
+     ) where TKey : notnull
     {
         foreach (var itemA in sourceA)
         {
             var key = keySelector(itemA);
             var itemB = sourceB.FirstOrDefault(element => keySelector(element).Equals(key));
 
-            if(itemB != null)
+            if (itemB != null)
                 yield return (itemA, itemB);
         }
-    } 
+    }
 }
