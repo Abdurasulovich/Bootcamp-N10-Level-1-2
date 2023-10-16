@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="Max.FileBaseContext.Context" Version="0.0.7" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
   </ItemGroup>
 
 </Project>
