@@ -1,6 +1,6 @@
 ﻿namespace MatchBoardService.Api.Services;
 
-public class EmailSenderService
+public class EmailSenderService : INotificationService
 {
     public ValueTask SendAsync(Guid userId, string content)
     {

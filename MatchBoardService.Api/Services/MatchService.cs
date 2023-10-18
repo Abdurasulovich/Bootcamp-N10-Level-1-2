@@ -13,7 +13,7 @@ public class MatchService : IEntityService
         _matchEventStore = matchEventStore;
     }
 
-    public async ValueAsync<TeamMatch> CreateAsync(TeamMatch match)
+    public async ValueTask<TeamMatch> CreateAsync(TeamMatch match)
     {
         Matches.Add(match);
         await _matchEventStore.CreateTeamMatchCreatedAsync(match);

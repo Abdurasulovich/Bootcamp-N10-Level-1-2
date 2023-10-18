@@ -1,11 +1,24 @@
+using MatchBoardService.Api.Events;
+using MatchBoardService.Api.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder
+    .Services
+    .AddSingleton<MatchEventStore>()
+    .AddSingleton<MatchService>()
+    .AddSingleton<UsersService>()
+    .AddSingleton<PromotionService>()
+    .AddSingleton<TeamService>()
+    .AddSingleton<INotificationService, EmailSenderService>()
+    .AddSingleton<INotificationService, SmsSenderService>();
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
